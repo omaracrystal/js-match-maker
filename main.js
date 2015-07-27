@@ -30,7 +30,7 @@ function studentInputChecker() {
 
 //function to log student info
 function studentLogger() {
-  studentlog = []
+  studentLog = []
 
   alert("Please fill in the following information about each student:","");
 
@@ -38,10 +38,13 @@ function studentLogger() {
     var name= prompt("What is the name of id " + [i+1] + " student?","");
     var phone= prompt("What is the phone number of id " + [i+1] + " student?", "");
     var city= prompt("What city does id " + [i+1] + " student live?","");
-    studentlog.push({"ID": i+1, "Name": name, "Phone Number": phone,"City": city});
-    console.log(studentlog);
+    studentLog.push({"ID": i+1, "Name": name, "Phone Number": phone,"City": city});
+    console.log(studentLog);
   };
+  studentAppender();
+  studentFiller();
 }
+
 
 
 
@@ -60,24 +63,57 @@ function mentorInputChecker() {
 
 //function to log mentor info
 function mentorLogger() {
-  mentorlog = []
+  mentorLog = []
   alert("Please fill in the following information about each mentor:","");
   for (var i = 0; i < mentorInput; i++) {
     var name= prompt("What is the name of id " + [i+1] + " mentor?","");
     var phone= prompt("What is the phone number of id " + [i+1] + " mentor?", "");
 
     var city= prompt("What city does id " + [i+1] + " mentor live?","");
-    mentorlog.push({"ID": i+1, "Name": name, "Phone Number": phone,"City": city});
-    console.log(mentorlog);
+    mentorLog.push({"ID": i+1, "Name": name, "Phone Number": phone,"City": city});
+    console.log(mentorLog);
   };
+  mentorAppender();
+  mentorFiller();
 }
 
 
-function phoneValidation () {
-  if (typeof(parseInt(phone)) !=== "number" && phone.length === 10) {
-    prompt("That is not a valid phone number. Please enter in only 10 numbers like so: 1234567890 with no special characters")
-  } else {
-    continue;
+//this function appends "li" items to the "studentList" ul according to the length of the studentLog
+function studentAppender() {
+  //grab ul by id "studentList"
+  var studentList = document.getElementById("studentList");
+  //append "li" elements to "studentList"
+  for (var i = 0; i < studentLog.length; i++) {
+    var li = document.createElement("li");
+    studentList.appendChild(li);
+  };
+}
 
-  }
+//this function fills in the innerHTML of each li created with the information in the studentLog
+function studentFiller() {
+  var studentList = document.getElementById("studentList");
+  for (var i = 0; i < studentLog.length; i++) {
+    studentList.children[i].innerHTML = "ID: " + studentLog[i].ID + "<br> Name: " + studentLog[i].Name + "<br> Phone Number: " + studentLog[i]["Phone Number"] + "<br> City: " + studentLog[i].City + "<br><br>";
+  };
+}
+
+//this function appends "li" items to the "mentorList" ul according to the length of the mentorLog
+function mentorAppender() {
+  //grab ul by id "mentorList"
+  var mentorList = document.getElementById("mentorList");
+  //append "li" elements to "mentorList"
+  for (var i = 0; i < mentorLog.length; i++) {
+    var li = document.createElement("li");
+    mentorList.appendChild(li);
+  };
+}
+
+//this function fills in the innerHTML of each li created with the information in the mentorLog
+function mentorFiller() {
+  //grab ul by id "mentorList"
+  var mentorList = document.getElementById("mentorList");
+  //covert innerHTML of "li" elements to match mentorlog
+  for (var i = 0; i < mentorLog.length; i++) {
+    mentorList.children[i].innerHTML = "ID: " + mentorLog[i].ID + "<br> Name: " + mentorLog[i].Name + "<br> Phone Number: " + mentorLog[i]["Phone Number"] + "<br> City: " + mentorLog.City + "<br><br>";
+  };
 }
